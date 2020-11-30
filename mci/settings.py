@@ -119,3 +119,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#Use this site key in the HTML code your site serves to users
+SITEKEY = "6LenxvIZAAAAAGPA41YzlrkZBHhiV5M7Q1b0YtX9"
+
+#Use this secret key for communication between your site and reCAPTCHA
+SECRETKEY = "6LenxvIZAAAAAO6YGHbgvCE3Dxg-ouo3Banbqh42"
