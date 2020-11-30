@@ -121,7 +121,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 #Use this site key in the HTML code your site serves to users
-SITEKEY = "6LenxvIZAAAAAGPA41YzlrkZBHhiV5M7Q1b0YtX9"
+SITEKEY = "6LdG3vMZAAAAAAORRFKK7SqXJHgxEaEyISqpAIBE"
 
 #Use this secret key for communication between your site and reCAPTCHA
-SECRETKEY = "6LenxvIZAAAAAO6YGHbgvCE3Dxg-ouo3Banbqh42"
+RECAPTCHA_SECRET_KEY = "6LdG3vMZAAAAABu6IQHJg2qB7oL7STcdfFepeXUW"
+
+POSTMARK_API_TOKEN = "f5e29a23-3106-41a1-a091-f73e032dbf0f"

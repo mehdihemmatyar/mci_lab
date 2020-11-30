@@ -12,6 +12,7 @@ from postmark import PMMail
 import random
 import string
 import time
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 
@@ -42,6 +43,31 @@ def grecaptcha_verify(request):
     return verify_rs.get("success", False)
 
 
+@csrf_exempt
+@require_POST
+def login(request):
+    # check if POST objects has username and password
+    if request.POST.has_key('username') and request.POST.has_key('password'):
+        username = request.POST['username']
+        password = request.POST['password']
+        this_user = get_object_or_404(User, username=username)
+        if (check_password(password, this_user.password)):  # authentication
+            this_token = get_object_or_404(Token, user=this_user)
+            token = this_token.token
+            context = {}
+            context['result'] = 'ok'
+            context['token'] = token
+            # return {'status':'ok','token':'TOKEN'}
+            return JsonResponse(context, encoder=JSONEncoder)
+        else:
+            context = {}
+            context['result'] = 'error'
+            # return {'status':'error'}
+            return JsonResponse(context, encoder=JSONEncoder)
+
+
+
+
 def register(request):
     if 'requestcode' in request.POST: #form is filled. if not spam, generate code and save in db, wait for email confirmation, return message
         #is this spam? check reCaptcha
@@ -63,10 +89,10 @@ def register(request):
                 temporarycode = Passwordresetcodes (email = email, time = now, code = code, username=username, password=password)
                 temporarycode.save()
                 message = PMMail(api_key = settings.POSTMARK_API_TOKEN,
-                                 subject = "فعالسازی اکاننت بستون",
-                                 sender = "jadi@jadi.net",
-                                 to = email,
-                                 text_body = " برای فعال کردن اکانت بستون خود روی لینک روبرو کلیک کنید: http://inl_mci_lab.com/accounts/register/?email={}&code={}".format(email, code),
+                                 subject = "فعالسازی اکانت تحلیلگر",
+                                 sender = "hematyar@mahsan.co",
+                                 to = "hematyar@mahsan.co" , #email,
+                                 text_body = " برای فعال کردن اکانت تحلیلگر خود روی لینک روبرو کلیک کنید: {}?email={}&code={}".format(request.build_absolute_uri('/accounts/register/') ,email, code),
                                  tag = "account request")
                 message.send()
                 context = {'message': 'ایمیلی حاوی لینک فعال سازی اکانت به شما فرستاده شده، لطفا پس از چک کردن ایمیل، روی لینک کلیک کنید.'}
@@ -125,3 +151,9 @@ def submit_income(request):
     return JsonResponse({
     'status' : 'ok',
     }, encoder =JSONEncoder)
+
+
+
+def index(request):
+    context = {}
+    return render(request, 'index.html', context)
