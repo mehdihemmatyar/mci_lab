@@ -7,12 +7,14 @@ from json import JSONEncoder
 from django.views.decorators.csrf import csrf_exempt
 from web.models import User, Token, Expense, Income, Passwordresetcodes
 from datetime import datetime
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 from postmark import PMMail
+from django.db.models import Sum, Count
 import random
 import string
 import time
 from django.views.decorators.http import require_POST
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -46,8 +48,11 @@ def grecaptcha_verify(request):
 @csrf_exempt
 @require_POST
 def login(request):
+    print(request.POST)
+    input("there")
     # check if POST objects has username and password
-    if request.POST.has_key('username') and request.POST.has_key('password'):
+    if 'username' in request.POST and 'password' in request.POST:
+        print('okkkkkkkkkkkkkkkkkkkkkk')
         username = request.POST['username']
         password = request.POST['password']
         this_user = get_object_or_404(User, username=username)
@@ -123,9 +128,9 @@ def register(request):
 
 
 @csrf_exempt
+@require_POST
 def submit_expense(request):
     print(request.POST)
-
     this_token = request.POST['token']
     this_user = User.objects.filter(token__token = this_token).get()
     if 'date' not in request.POST:
@@ -137,10 +142,11 @@ def submit_expense(request):
     'status' : 'ok',
     }, encoder =JSONEncoder)
 
+
 @csrf_exempt
+@require_POST
 def submit_income(request):
     print(request.POST)
-
     this_token = request.POST['token']
     this_user = User.objects.filter(token__token = this_token).get()
     if 'date' not in request.POST:
@@ -151,6 +157,18 @@ def submit_income(request):
     return JsonResponse({
     'status' : 'ok',
     }, encoder =JSONEncoder)
+
+@csrf_exempt
+def show(request):
+    this_token = request.POST['token']
+    this_user = User.objects.filter(token__token = this_token).get()
+    #Income.objects.all().aggregate(Count('amount'), Sum('amount'))  ##for all data in database
+    incoem = Income.objects.filter(this_user).aggregate(Count('amount'), Sum('amount'))
+    expense = Expense.objects.filter(this_user).aggregate(Count('amount'), Sum('amount'))
+    context = {}
+    context['expense'] = expense
+    context['income'] = income
+    return JsonResponse(context, encoder=JSONEncoder)
 
 
 
