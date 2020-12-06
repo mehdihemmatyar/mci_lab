@@ -170,7 +170,13 @@ def show(request):
     context['income'] = income
     return JsonResponse(context, encoder=JSONEncoder)
 
+def chartsshow(request):
+    context = {}
+    return render(request, 'chart-chartjs.html', context)
 
+def resetpassword(request):
+    context = {}
+    return render(request, 'resetpassword.html', context)
 
 def index(request):
     context = {}
