@@ -178,6 +178,15 @@ def resetpassword(request):
     context = {}
     return render(request, 'resetpassword.html', context)
 
+def upload(request):
+    context = {}
+    return render(request, 'upload_data.html', context)
+
+def showdb(request):
+    context = {}
+    return render(request, 'showdb.html', context)
+
+
 def index(request):
     context = {}
     return render(request, 'index.html', context)

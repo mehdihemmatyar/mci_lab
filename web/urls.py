@@ -9,6 +9,8 @@ urlpatterns = [
     path('resetpassword',views.resetpassword, name='resetpassword'),
     path('charts-show',views.chartsshow, name='charts-show'),
     path('accounts/login', views.login, name='login'),
+    path('upload', views.upload, name='upload'),
+    path('showdb', views.showdb, name='showdb'),
     path('', views.index, name='index'),
 
 
