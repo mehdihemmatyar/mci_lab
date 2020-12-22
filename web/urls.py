@@ -11,6 +11,8 @@ urlpatterns = [
     path('accounts/login', views.login, name='login'),
     path('upload', views.upload, name='upload'),
     path('showdb', views.showdb, name='showdb'),
+    path('train', views.train, name='train'),
+    path('test', views.test, name='test'),
     path('', views.index, name='index'),
 
 

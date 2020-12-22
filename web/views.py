@@ -186,6 +186,13 @@ def showdb(request):
     context = {}
     return render(request, 'showdb.html', context)
 
+def train(request):
+    context = {}
+    return render(request, 'train.html', context)
+
+def test(request):
+    context = {}
+    return render(request, 'test.html', context)
 
 def index(request):
     context = {}

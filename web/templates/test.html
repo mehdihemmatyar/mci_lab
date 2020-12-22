@@ -101,53 +101,36 @@
                     <div class="container-fluid">
                         <h1 class="mt-4">Time Series Analysis</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Upload Page</li>
+                            <li class="breadcrumb-item active">Test the model Page</li>
                         </ol>
 
 
-                                    
-
-   <div class="col-md-6 offset-md-3 mt-5">
-   
-     <br>
-     <form accept-charset="UTF-8" action="https://getform.io/f/{your-form-endpoint-goes-here}" method="POST"  target="_blank">
-       <div class="form-group">
-         <label for="exampleInputName">Name of Dataset</label>
-         <input type="text" name="fullname" class="form-control" id="exampleInputName" placeholder="Enter Dataset name" required="required">
-       </div>
-      
-       <div class="form-group">
-         <label for="exampleFormControlSelect1">Dataset type</label>
-         <select class="form-control" id="exampleFormControlSelect1" name="platform" required="required">
-           <option>PDR</option>
-           <option>ICDR</option>
-         </select>
-       </div>
-       <hr>
-       <div class="form-group mt-3">
-         <label class="mr-2">Upload:</label>
-         <input type="file" name="file">
-       </div>
-       <hr>
-       <button type="submit" class="btn btn-primary">Upload</button>
-     </form>
- </div> 
- 
-
+                        <form>
+                            <div class="form-group row">                   
+                              <label for="inputPassword3" class="col-sm-8 col-form-label">Dataset Name</label>
+                              <div class="col-sm-5">
+                                <input type="password" class="form-control" id="inputPassword3" placeholder="Dataset">                           
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="form-group col-md-5">
+                                    <label for="inputState">Models</label>
+                                    <select id="inputState" class="form-control">
+                                    <option selected>Choose...</option>
+                                    <option>...</option>
+                                    </select>
+                                </div>                                
+                            </div>
+                              
+                            
+                            <div class="form-group row">
+                              <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Starting Test</button>
+                              </div>
+                            </div>
+                          </form>
   
-                                    
-
-
-
-
-
-
-
-
-
-
-
-
+                        
 
 
                 <footer class="py-4 bg-light mt-auto">
